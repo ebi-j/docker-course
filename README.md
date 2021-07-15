@@ -222,3 +222,15 @@ docker exec -it -u [username] [process id] bash
 `chmod u+x` to add execute permission to the file owner.  
 `chmod o+x` to enable the permission to others.  
 `chmod g-x` to disable execute permission to group.
+
+## Docker Images
+
+Image includes everything that an app needs to run. Container gives an isolated environment to execute the app, it's just a process.
+
+`ADD` acts the same as `COPY` except for two addtional features: load resource from a URL, and uncompress a compressed file.
+
+`.dockerignore` is used to exclude all the folders and files from the build.
+
+`ENV` is to set the environment variables.
+
+`EXPOSE` is state which port Docker should listen to.
