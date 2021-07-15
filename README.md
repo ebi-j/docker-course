@@ -193,5 +193,22 @@ echo done
 
 ### Managing Processes
 
+`ps` to list the processes. 
+`sleep 3` to sleep prompt for 3 seconds. `sleep 3 &` will be running at the background.  
+`kill [PID]` to kill a process.
 
+### Managing Users
+
+`useradd` to add a new user. `usermod` to modify a user. `userdel` to delete a user.  
+`useradd -m [username]` create a user with a home directory.  
+`usermod -s /bin/bash [username]` modify user's shell program to bash.  
+`userdel [username]` delete the user.
+`adduser [username]` will create a user with the group created, home directory created, and allow you to set the password and other information.
+
+To log in as another user from Docker:
+```console
+docker exec -it -u [username] [process id] bash
+```
+
+### Managing Groups
 
