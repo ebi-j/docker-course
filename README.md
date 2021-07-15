@@ -234,3 +234,7 @@ Image includes everything that an app needs to run. Container gives an isolated 
 `ENV` is to set the environment variables.
 
 `EXPOSE` is state which port Docker should listen to.
+
+`RUN` is executed when building the image, `CMD` instruction is a runtime instruction.  
+`CMD npm start` runs in a shell, in Linux, /bin/sh, in Windows, cmd, `CMD ["npm", "start"]` executes directly.
+`ENTRY
