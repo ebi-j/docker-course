@@ -147,3 +147,51 @@ app remove nano
 
 `cat` to view files. `more` for long file. `less` for long file with up and down options (need to install less from apt). Press `Q` to quit. `head` shows the first a few lines of the file with option `-n`. `tail` shows the last a few lines of a file.
 
+### Redirection
+
+`cat` stands for concatenate.  
+`cat [file1] > [file2]` read file1 and write to file 2. `cat [file1] [file2] > [file3]` read file1 and file2 and write to file3. `echo hello > [file]` write a line of "hello" to file. `ls -l [directory] > [file]` write long list result of directory and write the results to file.  
+`>>` appends data instead of overwriting the file.
+
+### Searching for Text
+
+`grep` stands for global regular expression print.  
+`grep hello [file]` Search hello in file. 
+`grep -i` case insensitive.  
+`grep -r` recursively. To combine together, `grep -ir`.
+
+`find` shows all files and directories of the current directory including hidden ones. `-type d` only for directories, `type f` only for files. `-name` name pattern.
+
+### Chaining Commands
+
+Use `;`. The error command will not affect the rest of the commands.
+
+```console
+mkdir test;cd test;echo done
+```
+
+Use `||`. When a command fails the rest commands will execute, otherwise, the rest commands will not execute.
+
+```console
+mkdir test||echo "directory exists"
+```
+
+Use `|` to create a pipe. `ls /bin | less` to send the output of the list of `/bin` and view it with command `less`. 
+
+Use `\` to start a new line in chainning commands.
+
+```console
+mkdir test;\
+cd test;\
+echo done
+```
+
+### Environment Variables
+
+`printenv` to print all the environment variables. `printenv [name]` prints a certain environment variable, or use `echo $[name]`.  
+`export` to set an environment variable in the current terminal session (no longer exists when the terminal is turned off). If we want to persist a variable, write it to .bashrc: `echo DB_USER >> .bashrc`. `.bashrc` is loaded only once, to reload, `source .bashrc` (need to be in the home directory to run this command).
+
+### Managing Processes
+
+
+
