@@ -52,3 +52,29 @@ WORKDIR /app
 # Run the command we want.
 CMD node app.js
 ```
+
+To let Docker build the application:
+
+```console
+docker build -t hello-docker .
+```
+
+`-t` defines the tag of the build (it will also be the repository name, which will be used to run the app), `.` lets Docker know that the dockerfile is in the current directory.
+
+To check all the images on the computer:
+
+```console
+docker image ls
+```
+
+or 
+
+```console
+docker images
+```
+
+To let Docker run the app:
+
+```console
+docker run hello-docker
+```
