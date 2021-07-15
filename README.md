@@ -131,11 +131,7 @@ app remove nano
 
 ### Navigating the File System
 
-To print the working directory:
-
-```console
-pwd
-```
+`pwd` to print the working directory:.
 
 `ls` list, `ls -1` one record a line, `ls -l` list with long records. `li [path]` list a directory.
 
@@ -148,3 +144,6 @@ pwd
 `touch` to create a or multiple files.
 
 `rm` to remove files, `rm -r` to recursively remove files and folders.
+
+`cat` to view files. `more` for long file. `less` for long file with up and down options (need to install less from apt). Press `Q` to quit. `head` shows the first a few lines of the file with option `-n`. `tail` shows the last a few lines of a file.
+
