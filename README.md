@@ -237,4 +237,27 @@ Image includes everything that an app needs to run. Container gives an isolated 
 
 `RUN` is executed when building the image, `CMD` instruction is a runtime instruction.  
 `CMD npm start` runs in a shell, in Linux, /bin/sh, in Windows, cmd, `CMD ["npm", "start"]` executes directly.
-`ENTRY
+`ENTRYPOINT` can only be overwritten with `--entrypoint` option, while `CMD` can be easily overwritten in Docker CLI.
+
+When writing a dockerfile, always have stable instructions staying at the top, so they can be cached for the performance purpose, and then the changing instructions.
+
+Dockerfile for a React app image:
+
+```dockerfile
+FROM node:14.16.0-alpine3.13
+# Add an app user instead of using the root user
+RUN addgroup app && adduser -S -G app app
+# Set the user who is going to login and do the operations
+USER app
+WORKDIR /app
+# Copy package json first, so installing dependencies can be cached
+COPY package*.json .
+RUN npm install
+COPY . .
+# Define enviroment variable
+ENV API_URL https://localhost:3001
+# Define exposing to which port
+EXPOSE 3000
+# Set up the entrypoint command
+ENTRYPOINT ["npm", "start"]
+```
