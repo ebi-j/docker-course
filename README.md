@@ -78,3 +78,73 @@ To let Docker run the app:
 ```console
 docker run hello-docker
 ```
+
+## Linux Command Line
+
+To see running docker processes:
+
+```console
+docker ps
+```
+
+To see all docker processes:
+
+```console
+docker ps -a
+```
+
+To run app interactively:
+
+```console
+docker run -it ubuntu
+```
+
+`-it` means interactive.
+
+### apt
+
+Advanced Package Tool (in Linux)
+
+To update apt database:
+
+```console
+apt update
+```
+
+To install a package:
+
+```console
+apt install nano
+```
+
+To list the database:
+
+```console
+apt list
+```
+
+To remove a package:
+
+```console
+app remove nano
+```
+
+### Navigating the File System
+
+To print the working directory:
+
+```console
+pwd
+```
+
+`ls` list, `ls -1` one record a line, `ls -l` list with long records. `li [path]` list a directory.
+
+`cd ~` to home directory.
+
+`mkdir [directory name]` to create a directory.
+
+`mv` move or rename folder or files.
+
+`touch` to create a or multiple files.
+
+`rm` to remove files, `rm -r` to recursively remove files and folders.
