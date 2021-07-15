@@ -212,3 +212,13 @@ docker exec -it -u [username] [process id] bash
 
 ### Managing Groups
 
+`groupadd [group name]` to add a new group.
+`usermod -G [group name]` to add a user to a group or groups, with "," to separate group names.
+`usermod -g [group name]` to add a user to a primary group.
+
+### File Permissions
+
+`chmod` to change permissions for file onwer, group, and public.  
+`chmod u+x` to add execute permission to the file owner.  
+`chmod o+x` to enable the permission to others.  
+`chmod g-x` to disable execute permission to group.
