@@ -266,3 +266,6 @@ ENTRYPOINT ["npm", "start"]
 
 To tag an image `docker build -t[app name]:[tag name] .`, or `docker image tag [app name]:[tag name] [app name]:[new tag name]`. To remove a tag `docker image remove [app name]:[tag name]`.
 
+`docker login` to login to docker registory. `docker push [app]:[tag]` to push the image up to the registory.
+
+`docker image save -o [file] [image]` to output an image. `docker image load -i [file]` to import an image.
