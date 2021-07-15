@@ -261,3 +261,5 @@ EXPOSE 3000
 # Set up the entrypoint command
 ENTRYPOINT ["npm", "start"]
 ```
+
+`Loose images` dangling images with no tag name and no repository name. To get rid of them: `docker container prune` and `docker image prune`.
