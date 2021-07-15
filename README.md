@@ -262,4 +262,7 @@ EXPOSE 3000
 ENTRYPOINT ["npm", "start"]
 ```
 
-`Loose images` dangling images with no tag name and no repository name. To get rid of them: `docker container prune` and `docker image prune`.
+`Loose images` dangling images with no tag name and no repository name. To get rid of them: `docker container prune` and `docker image prune`. `docker container prune` will delete all the containers which are stopped. `docker image rm [image name]` to delete a single image.
+
+To tag an image `docker build -t[app name]:[tag name] .`, or `docker image tag [app name]:[tag name] [app name]:[new tag name]`. To remove a tag `docker image remove [app name]:[tag name]`.
+
