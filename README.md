@@ -269,3 +269,43 @@ To tag an image `docker build -t[app name]:[tag name] .`, or `docker image tag [
 `docker login` to login to docker registory. `docker push [app]:[tag]` to push the image up to the registory.
 
 `docker image save -o [file] [image]` to output an image. `docker image load -i [file]` to import an image.
+
+## Working with Containers
+
+`docker ps` to see all running containers / processes.  
+`docker run [image]` run an image in a container. `docker run -d [image]` to run an image in a container in detached mode so to be seen from `docker ps`. `docker run -d --name [container name] [iamge]` to give a container name instead of a randomly generated name.
+
+`docker logs [container]` to view container logs. `docker logs -f [container]` to see the logs continuously. `docker logs -n [number] [container]` to see a number of logs.
+
+`docker run -d -p [port]:[port] --name [port name] [image]` to run an image with publishing port option, the first port is the local port, the second is the port that the app uses.
+
+`docker exec [container] [command]` to execute a command in a running container. `docker exec -it [container] [command]` to execute a command in interactive mode, e.g. open up a shell session.
+
+`docker stop [container]` to stop a container. `docker start [container]` to start a container.
+
+`docker container rm [container]` or `docker rm [container]` to remove a container. When a container is running, either stop it first, or using `-f` option to force to remove the container.
+
+A volume is a storage outside of containers. `docker volume create [name]` to create a volume. `docker volume inspect [name]` to check the details of the volume.  
+Example:
+```json
+[
+    {
+        "CreatedAt": "2021-07-16T00:25:07Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/app-data/_data",
+        "Name": "app-data",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+"Driver" can be `cloud`, too. Need to do more research on that.
+
+`docker run -d p 4000:3000 -v [volume]:[file system absolute path] [iamge]`, e.g. `docker run -d p 4000:3000 -v app-data:/app/data react-app`. The data stored in `/app/data` will not be deleted when the container is removed.
+
+To copy files out of a container to the host, `docker cp [container id]:[path] [target]`.
+
+To share source code between the local app and the container. `docker run -d -p [local port]:[app port] -v $(pwd):[app working directory] [image]`, e.g. `docker run -d -p  4000:3000 -v $(pwd):/app react-app`. `$(pwd)` is the current work directory.
+
+## Docker Compose
