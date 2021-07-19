@@ -309,3 +309,90 @@ To copy files out of a container to the host, `docker cp [container id]:[path] [
 To share source code between the local app and the container. `docker run -d -p [local port]:[app port] -v $(pwd):[app working directory] [image]`, e.g. `docker run -d -p  4000:3000 -v $(pwd):/app react-app`. `$(pwd)` is the current work directory.
 
 ## Docker Compose
+
+### Docker Compose File
+An example of a docker compose file for a react application as front-end, node as back end API, and Mongo DB as the database.
+
+```yaml
+# Compose file format
+version: "3.8"
+
+# Services of the project
+# Name can be anything
+services:
+    frontend:
+        # Path of the build
+        build: ./frontend
+        ports:
+            - 3000:3000
+        volumes:
+            - ./frontend:/app
+    backend:
+        build: ./backend
+        ports:
+            - 3001:3001
+        environment: 
+            - DB_URL=mongodb://db/vidly
+        volumes:
+            # this is to map the working directory to the application directory
+            # docker run -v $(pwd):/app
+            - ./backend:/app
+        # Overwrite original CMD in the docker file to migrate the databse before running the app.
+        # ./wait-for is the script to wait of the database before running the following commands.
+        command: ./wait-for db:27017 && migrate-mongo up && npm start
+    database:
+        # Image of the database
+        image: mongo:4.0-xenial
+        ports:
+            - 27017:27017
+        # Data volume, so Mongo DB won't write data to temp files in the container
+        volumes:
+            - vidly:/data/db
+# Define volume            
+volumes:
+    vidly:
+```
+
+`docker-compose up` starts the application. `docker-compose -d` runs in detached mode. `docker-compose ps` see all up and running processes. `docker-compose down` stops the applications.
+
+### Docker Network
+
+Docker network has three parts: bridge, host, and none. `docker network ls` lists the network. There is a DNS resovler in the container, getting the IP address from the DNS server. Each container has its IP address. Log in as the root user `docker exec -it -u root [container] sh` and use `ifconfig` to check the IP address of the container.
+
+
+### Logs
+
+`docker-compose logs` to view the logs. `docker-compose logs -f` to follow the logs.
+
+### Publishing Changes
+
+By mapping the volumes in the application we can publish changes without stopping and restarting applications.
+
+### Migrating the Database
+
+Run the database migration script by overwriting the original `CMD` in the docker file. To wait for `db` up and running before running the script: `./wait-for`. Alternatively run a script which contains all the commands if the commands are to long.
+
+```sh
+echo "Waiting for MongoDB to start..."
+./wait-for db:27017 
+
+echo "Migrating the databse..."
+npm run db:up 
+
+echo "Starting the server..."
+npm start
+```
+
+```yaml
+command: ./docker-entrypoint.sh
+```
+
+### Running Tests
+
+```yaml
+web-tests:
+    image:[app]
+    volumes:
+        - (same mapping as the app)
+    command: npm test
+```
